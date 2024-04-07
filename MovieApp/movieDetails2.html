@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            background-color: #616161;
+        }
+
+
+
+
+        #movies {
+            height: 200px;
+            width: 222px;
+            border: 1px solid black;
+            overflow: scroll;
+            border-top: none;
+            position: absolute;
+            background-color: #81D4FA;
+            margin-left: 464px;
+        }
+
+        #show {
+            width: 50%;
+            display: inline-block;
+            vertical-align: top;
+            border: 2px solid #757575;
+            box-shadow: 10px 5px 5px #757575;
+
+            background-color: #757575;
+            color: white;
+        }
+
+        img {
+            width: 18%;
+
+        }
+
+        input {
+            width: 210px;
+            margin-left: 465px;
+
+        }
+
+        #navbar {
+            border: 3px solid black;
+            background-color: black;
+
+
+        }
+
+
+        #navbar>ul {
+            display: flex;
+            list-style: none;
+            margin: 4px;
+            font-size: 20px;
+
+        }
+
+        #navbar>ul>li {
+            margin: 1%;
+
+        }
+
+        #navbar>ul>li>a {
+            text-decoration: none;
+            color: white;
+        }
+
+        #navbar>ul>li:nth-child(6) {
+            margin-left: 3%;
+            /* border: 3px solid yellow; */
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <ul>
+            <li><a href="home.html">Disney+hotstar</a></li>
+            <li><a href="">TV</a></li>
+            <li><a href="">Movies</a></li>
+            <li><a href="">Sports</a></li>
+            <li><a href="">Disney+</a></li>
+            <li>
+                <input oninput="debounce(main,1000)" type="text" id="movie" placeholder="Enter movie name" />
+                <div id="movies"></div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- <button onclick="home()">Go to Home</button> -->
+    <div id="movieDetail">
+
+    </div>
+</body>
+
+</html>
+
+<script>
+
+
+    let moviedetails = JSON.parse(localStorage.getItem('moviedetails11'))
+    console.log(moviedetails)
+
+
+    function showDetails(d) {
+
+        d.innerHTML = null;
+
+
+        let div = document.createElement('div')
+        let moviePoster = document.createElement('img')
+        moviePoster.src = `https://image.tmdb.org/t/p/w500${d.poster_path}`;
+
+        let div2 = document.createElement('div')
+        div2.id = 'show'
+        
+        let releaseDate = document.createElement('p')
+        releaseDate.textContent = d.release_date
+        let title = document.createElement('p')
+        title.textContent = d.title
+        let ratings = document.createElement('p')
+        ratings.textContent = d.vote_average
+        let des = document.createElement('p')
+        des.textContent = d.overview
+        let recom = document.createElement('label')
+        recom.textContent = 'recommendated'
+        recom.style.backgroundColor = '#FBC02D'
+
+        if (d.vote_average > 8.5) {
+            div2.append(recom)
+        }
+        div2.append(title, releaseDate, ratings, des)
+        div.append(moviePoster, div2)
+        movieDetail.append(div)
+
+
+
+    }
+    showDetails(moviedetails)
+
+</script>
+<script src="debouncing.js"></script>

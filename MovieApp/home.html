@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<style>
+  body {
+    background-color: #212121;
+    color: white;
+  }
+
+  #tranding {
+    display: grid;
+    gap: 2em;
+    grid-template-columns: repeat(5, 15em);
+  }
+
+  #moviePoster {
+    height: 200px;
+    width: 200px;
+  }
+
+  #movies {
+    height: 200px;
+    width: 250px;
+    /* border: 1px solid black; */
+    overflow: scroll;
+    border-top: none;
+    position: absolute;
+    background-color: #81D4FA;
+    /* margin-left: 54%; */
+  }
+
+  input {
+    width: 250px;
+
+  }
+
+  #navbar {
+    border: 3px solid black;
+    background-color: black;
+  }
+
+
+  #navbar>ul {
+    display: flex;
+    list-style: none;
+    margin: 4px;
+    font-size: 20px;
+
+
+  }
+
+  #navbar>ul>li {
+    margin: 1%;
+
+  }
+
+  #navbar>ul>li:nth-child(6) {
+    margin-left: 30%;
+    border: 3px solid yellow;
+
+  }
+
+  #navbar>ul>li>a {
+    text-decoration: none;
+    color: white;
+  }
+
+  #div {
+    margin: 20px;
+    border: 2px solid #607D8B;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px cornflowerblue;
+    transition: transform .2s;
+    width: 200px;
+  }
+
+  #div:hover {
+    transform: scale(1.1);
+  }
+
+
+  #loginBtn {
+    width: 5rem;
+    height: 2rem;
+    margin: 11px 17px;
+    border: none;
+    background-color: #78909C;
+
+
+  }
+
+  #overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+
+  }
+
+  /* #text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+  } */
+
+  #formContainer {
+    width: 35rem;
+    height: 20rem;
+    background-color: #192133;
+    margin: 5rem auto;
+  }
+
+  #login-form {
+    display: grid;
+    /* padding: 13px; */
+    margin: 0 3rem;
+    grid-template-columns: 20% 70%;
+    gap: 2rem;
+
+    /* box-shadow: 2px 3px 15px rgb(156, 132, 88); */
+  }
+
+  #login-form>input:nth-child(1),
+  input:nth-child(2) {
+    height: 1.2rem;
+  }
+
+
+
+  #signBtn {
+    margin-top: 1rem;
+    /* margin-left: 98px; */
+    width: 10.2rem;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 1.6rem;
+  }
+
+  #submit {
+    margin-top: 1rem;
+    /* margin-left: -59px; */
+    width: 6.2rem;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 1.6rem;
+  }
+  #errorMsg{
+    color: red;
+    margin: auto;
+    display: inline-block;
+  }
+
+  #cancelBtn{
+    margin-left: 16rem;
+    background: black;
+    border: 1px solid white;
+  }
+  #overlay2{
+            border: 2px solid black;
+            position: fixed;
+    display: none;
+    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+        }
+        #formContainer2 {
+    width: 35rem;
+    height: 32rem;
+    background-color: #192133;
+    margin: 5rem auto;
+  }
+
+  #login-form2 {
+    display: grid;
+    /* padding: 13px; */
+    margin: 0 3rem;
+    grid-template-columns: 20% 70%;
+    gap: 2rem;
+
+    /* box-shadow: 2px 3px 15px rgb(156, 132, 88); */
+  }
+
+  #login-form2>input:nth-child(1),
+  input:nth-child(2) {
+    height: 1.2rem;
+  }
+  #errorMsg2{
+    color: red;
+    margin: auto;
+    display: inline-block;
+  }
+
+#submit2{
+  margin-top: 1rem;
+  
+    width: 4.5rem;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 1.6rem; 
+}
+</style>
+
+<body>
+
+  <nav id="navbar">
+    <ul>
+      <li><a href="home.html">Disney+hotstar</a></li>
+      <li><a href="">TV</a></li>
+      <li><a href="">Movies</a></li>
+      <li><a href="">Sports</a></li>
+      <li><a href="">Disney+</a></li>
+      <li>
+        <input oninput="debounce(main,1000)" type="text" id="movie" placeholder="Enter movie name" />
+        <div id="movies"></div>
+      </li>
+      <button id="loginBtn" onclick="on()">login</button>
+    </ul>
+  </nav>
+  <h1 id="h1">Trending Movies</h1>
+  <div id="tranding">
+
+  </div>
+  <div id="overlay">
+    <div id="formContainer">
+      
+      <h1 style="display: inline-block;margin: 0.2rem 6px; color: #EEEEEE;">Login to continue</h1>
+      <button id="cancelBtn" onclick="off()"><img src="clear.svg" alt=""></button>
+      <div>
+        <h2 id="errorMsg"></h2>
+    </div>
+      <form id="login-form" onsubmit="Login(event)">
+
+
+        Username <input type="text" id="loginuser" placeholder="username" required/>
+
+        Password <input type="password" id="loginpassword" placeholder="password" required/>
+     
+        <button id="submit" onclick="Login()">Submit</button>
+        <button id="signBtn" onclick="on2()">Create an account</button>
+
+      </form>
+     
+
+    </div>
+  </div>
+  <div id="overlay2" >
+    <div id="formContainer2">
+      
+      <h1 style="display: inline-block;margin: 0.2rem 6px; color: #EEEEEE;">SignUp to continue</h1>
+      <button id="cancelBtn" onclick="off2()"><img src="clear.svg" alt=""></button>
+      <div>
+        <h2 id="errorMsg2"></h2>
+    </div>
+      <form id="login-form2" onsubmit="Signup(event)">
+
+        Name<input type="text" id="name" placeholder="enter your name" required/>
+        Email<input type="email" id="email" placeholder="enter your email" required/>
+        Password<input type="password" id="password" placeholder="enter your password" required/>
+        Username<input type="text" id="username" placeholder="enter your username" required/>
+        Mobile<input type="number" id="mobile" placeholder="enter your mobile no" required/>
+        Description<input type="text" id="description" placeholder="description" required/>
+        <input id="submit2" type="submit" />
+
+      </form>
+     
+
+    </div>
+  </div>
+
+
+
+</body>
+<script src="debouncing.js"></script>
+
+<script>
+
+let loginBtn=document.getElementById('loginBtn')
+
+let nameU=JSON.parse(localStorage.getItem('movieUser'))
+if(nameU==null)
+loginBtn.innerHTML="Sign Up"
+else
+loginBtn.innerHTML=nameU
+
+function on2(){
+  document.getElementById("overlay2").style.display = "block";
+}
+function off2(){
+  document.getElementById("overlay2").style.display = "none";
+  document.getElementById("overlay").style.display = "none";
+
+}
+
+let errorMsg2=document.getElementById('errorMsg2');
+function Signup(e) {
+        e.preventDefault()
+        let myform = document.getElementById('login-form2')
+        let user_detail = {
+
+            name: myform.name.value,
+            email: myform.email.value,
+            password: myform.password.value,
+            username: myform.username.value,
+            mobile: myform.mobile.value,
+            description: myform.description.value
+        };
+        console.log('user_detail:', user_detail);
+
+
+        user_detail = JSON.stringify(user_detail);
+
+        fetch("https://masai-api-mocker.herokuapp.com/auth/register", {
+            method: 'POST',
+            body: user_detail,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }).then((res) => {
+            return res.json();
+        }).then((res) => {
+            console.log(res)
+            if (res.error==true) {
+              errorMsg2.innerHTML = 'Registration failed, user already exists.'
+            }
+            else {
+                alert('Registration Done')
+                window.location.href = 'home.html';
+            }
+        })
+            .catch((err) => {
+                console.log(err)
+            });
+
+    }
+
+
+
+   
+    let errorMsg=document.getElementById('errorMsg');
+function Login(e){
+    e.preventDefault()
+        let myform = document.getElementById('login-form')
+        let user_detail = {
+            password: myform.loginpassword.value,
+            username: myform.loginuser.value,
+        };
+        console.log('user_detail:', user_detail);
+
+    let data2 = JSON.stringify(user_detail);
+    console.log('data2:', data2)
+
+
+
+    fetch("https://masai-api-mocker.herokuapp.com/auth/login", {
+        method: 'POST',
+        body: data2,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((res)=>{
+        return res.json();
+    }).then((res)=>{
+        console.log(res)
+        if(res.error==true){
+            errorMsg.innerHTML='Invalid Credential! Please Try again';
+        }else{
+            fetchmyData(user_detail.username,res.token)
+        }
+    })
+.catch((err)=>{
+    console.log(err)
+});
+
+}
+
+
+function fetchmyData(username,token){
+    fetch(`https://masai-api-mocker.herokuapp.com/user/${username}`,{
+        headers:{
+            'Content-Type':'application/json',
+            Authorization:`Bearer ${token}`
+        },
+    })
+    .then((res)=>{
+        return res.json();
+    }).then((res)=>{
+        console.log(res)
+        localStorage.setItem('movieUser',JSON.stringify(res.name))
+        window.location.href='home.html'
+        // window.location.reload()
+        // console.log('yo')
+       
+
+    })
+.catch((err)=>{
+    console.log(err)
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+  let tranding = document.getElementById('tranding')
+
+  function on() {
+    document.getElementById("overlay").style.display = "block";
+  }
+
+  function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+
+
+
+  async function trandingMovies() {
+
+    let res = await fetch(`https://api.themoviedb.org/3/trending/movie/week?api_key=0e56d0b10bfcaa71fd0a6dffe06d5f59`)
+    let data = await res.json()
+
+    console.log(data)
+    showDetails(data.results)
+
+  }
+
+  trandingMovies()
+
+
+  function showDetails(trandMoives) {
+
+    trandMoives.innerHTML = null;
+    trandMoives.forEach((M) => {
+      let div = document.createElement('div')
+      div.id = 'div'
+
+      let moviePoster = document.createElement('img')
+      moviePoster.id = "moviePoster"
+      moviePoster.src = `https://image.tmdb.org/t/p/w500${M.poster_path}`
+
+      let title = document.createElement('p')
+      title.textContent = M.title
+
+
+      div.append(moviePoster, title)
+
+      tranding.append(div)
+
+
+      div.onclick = () => {
+        console.log(M)
+        trand_movieee(M)
+      }
+
+    })
+
+
+
+
+
+  }
+
+
+  async function trand_movieee(dd) {
+
+    console.log(dd.id)
+
+    let res = await fetch(`https://api.themoviedb.org/3/movie/${dd.id}?api_key=0e56d0b10bfcaa71fd0a6dffe06d5f59`)
+    let data = await res.json()
+
+    localStorage.setItem('moviedetails11', JSON.stringify(data))
+
+    window.location.href = 'movieDetails2.html';
+
+
+  }
+</script>
